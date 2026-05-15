@@ -63,6 +63,15 @@ INBOX_CACHE_TTL_S = 45
 IMAP_UNLIMITED_HARD_MAX = 2500
 IMAP_SCAN_BUDGET_S = 12
 
+from fastapi.middleware.cors import CORSMiddleware
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+) 
 init_db()
 create_senders_table()
 _DB_CONN = None
