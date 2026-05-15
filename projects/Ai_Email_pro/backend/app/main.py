@@ -1,6 +1,15 @@
 from __future__ import annotations
 from datetime import datetime, timezone
 import copy
+from fastapi.middleware.cors import CORSMiddleware
+app = FastAPI(title="AI Email Automation Agent")
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import time
 import threading
