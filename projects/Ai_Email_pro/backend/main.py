@@ -14,6 +14,7 @@ import hashlib
 import re
 import os
 from imap_tools import MailBox
+import traceback
 
 from app.ai_client import API_KEY, answer_email_question, enhance_email
 from app.email_service import load_smtp_settings, send_email_smtp
@@ -164,6 +165,7 @@ def send_emails_worker(
         except Exception as e:
 
             print(f"[THREAD ERROR] {e}")
+            traceback.print_exc()
 
             with send_lock:
                 parallel_send_state[job_id]["processed"] += 1
@@ -739,6 +741,8 @@ def send_single_email_worker(
         }
 
     except Exception as e:
+
+        traceback.print_exc()
 
         # Thread-safe fail update
         with send_lock:
