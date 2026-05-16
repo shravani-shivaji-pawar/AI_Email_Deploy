@@ -65,13 +65,19 @@ IMAP_SCAN_BUDGET_S = 12
 
 from fastapi.middleware.cors import CORSMiddleware
 
+origins = [
+    "http://localhost:5173",
+    "https://ai-email-deploy-6ng9.vercel.app",
+    
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
-) 
+)
 init_db()
 create_senders_table()
 _DB_CONN = None
